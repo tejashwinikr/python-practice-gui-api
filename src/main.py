@@ -1,6 +1,8 @@
 from tkinter import *
+import os
 
 count = 0
+food= ['pizza','hamburger','salad']
 
 def click():
     print('you clicked a button')
@@ -20,12 +22,38 @@ def backspaceFun():
 def DeleteFun():
     entry.delete(0,END) 
     
+def checkFun():
+     if(x.get()== 1):
+         print("you agreed to this")
+     elif(x.get()==0):
+         print("you dont agree!!")
+  
+def order():
+    print("you order for " + food[f.get()])   
+    if(x.get()==0):  
+        print('pizza')
+    elif(x.get()==1):
+        print('hamburger')
+    elif(x.get()==2):
+        print('salad')
+    else:
+        print('huh? sorry?')
+
+def tempscaleFun():
+    print("the temp is "+str(tempscale.get()) + ' deg celcius')
+
 window = Tk()
 
-# icon =PhotoImage(file='logo.png')
-window.geometry('500x500')
+x =IntVar()
+f= IntVar()
+
+#this variable can String,Boolean  while assignging onoffvalue we use specified string like yes no and boolena like 01
+
+icon_path = os.path.join(os.path.dirname(__file__), 'png-icons', 'star.png')
+icon =PhotoImage(file=icon_path)
+window.geometry('700x500')
 window.title("teju demo123")
-# window.iconphoto(True,icon)
+window.iconphoto(True,icon)
 window.config(background='green')
 
 label = Label(window,text='hey',font=('Arial',14,'bold'),bg='white',
@@ -61,6 +89,34 @@ backspace_button.pack(side=RIGHT)
 delete_button = Button(window,text='Delete',command=DeleteFun,font=('comic sans',14,'bold'),bg='black',
               fg='pink',activebackground='black',activeforeground='pink',state=ACTIVE)
 delete_button.pack(side=RIGHT)
+
+checkbox = Checkbutton(window,text='i agree to this',variable=x,onvalue=1,offvalue=0,command=checkFun,font=('Arail',20),
+                       bg='black',fg='pink',activebackground='black',activeforeground='pink',padx=25,pady=10)
+checkbox.pack()
+
+# pizzaImage=PhotoImage(file='')
+# hamburgerImage=PhotoImage(file='')
+# saladImage=PhotoImage(file='')
+
+# foodImages=[pizzaImage,hamburgerImage,saladImage]
+
+for index in range(len(food)):
+    radio = Radiobutton(window,text=food[index],variable=f,value=index,padx=25,font=('Impact',20),command=order)
+    #image=foodImages[index],compound='left',indicatoron=0,width=375
+    radio.pack(anchor=W)
+    
+# hotImage=PhotoImage(file='')
+# hotLabel=Label(image=hotImage)
+# coldImage=PhotoImage(file='')
+# coldLabel=Label(image=hotImage)
+
+tempscale = Scale(window,from_=100,to=0,length=600,orient=VERTICAL,font=['consoles',20],tickinterval=10,
+                  showvalue=0,resolution=5,fg='#FF1C00',bg='#36E0F1')
+tempscale.set(((tempscale['from']-tempscale['to'])/2)-tempscale['to'])
+tempscale.pack()
+tempscale_button = Button(window,text='temp submit',command=tempscaleFun,font=('comic sans',14,'bold'),bg='black',
+              fg='pink',activebackground='black',activeforeground='pink',state=ACTIVE)
+tempscale_button.pack(side=RIGHT)
 
 window.mainloop()
 
