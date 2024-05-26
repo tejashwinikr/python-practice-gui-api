@@ -1,4 +1,5 @@
 from tkinter import *
+import os
 
 count = 0
 food = ['pizza', 'hamburger', 'salad']
@@ -38,6 +39,11 @@ def create_window():
     window.geometry('700x500')
     window.title("Teju Demo")
     window.config(background='green')
+    
+      # Load the image
+    icon_path = os.path.join(os.path.dirname(__file__), '..', 'png-icons', 'star.png')
+    icon = PhotoImage(file=icon_path)
+    window.iconphoto(True,icon)
 
     label = Label(window, text='Hey', font=('Arial', 14, 'bold'), bg='white', fg='pink', relief=RAISED, bd=10, padx=20, pady=20)
     label.pack(pady=10)

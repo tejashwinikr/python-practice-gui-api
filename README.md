@@ -17,3 +17,6 @@ Run the main script:
 python src/main.py
 
 python watcher.py
+
+# pip install requests
+for api request
