@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import messagebox,colorchooser,filedialog #submodules
-from tkinter.ttk import *
+# from tkinter.ttk import *
 import time
 import os
 
@@ -9,6 +9,8 @@ food = ['pizza', 'hamburger', 'salad']
 window = Tk()
 percent = StringVar()
 text= StringVar()
+icon_path = os.path.join(os.path.dirname(__file__), 'star.png')
+myimage = PhotoImage(file=icon_path)
 
 def click():
     global count
@@ -159,11 +161,46 @@ def start():
         text.set(str(x) + "/" + str(tasks)+ " tasks completed")
         window.update_idletasks()
        
+def doSomethingOnKEY(event):
+    # print("You pressed: " + event.keysym)
+    key_ev_label.config(text=event.keysym)
+
+def doSomethingOnMouse(event):
+    print("You did something on mouse!!" + str(event.x) +" "+ str(event.y))
+   
+def drag_start(event):
+    widget = event.widget
+    widget.startX = event.x
+    widget.startY = event.y
+
+def drag_motion(event):
+    widget = event.widget
+    x = widget.winfo_x() - widget.startX + event.x
+    y = widget.winfo_y() - widget.startY + event.y
+    widget.place(x=x,y=y)   
+   
+def move_up(event):
+    label_imageMove.place(x= label_imageMove.winfo_x(), y= label_imageMove.winfo_y()-10)
+def move_down(event):
+    label_imageMove.place(x= label_imageMove.winfo_x(), y= label_imageMove.winfo_y()+10)
+def move_left(event):
+    label_imageMove.place(x= label_imageMove.winfo_x()-10, y= label_imageMove.winfo_y())
+def move_right(event):
+    label_imageMove.place(x= label_imageMove.winfo_x()+10, y=label.winfo_y())
+   
+def move_up_canvas(event):
+   canvas.move(canvaImage,0,-10)
+def move_down_canvas(event):
+   canvas.move(canvaImage,0,10)
+def move_left_canvas(event):
+   canvas.move(canvaImage,-10,0)
+def move_right_canvas(event):
+   canvas.move(canvaImage,10,0)
    
 #main gui function 
 def create_window():
     global entry, x, f, tempscale,listbox,entryToList,delete_item_button,msg_btn,jin_button
-    global textArea,file_btn,suga_text,bar
+    global textArea,file_btn,suga_text,bar, key_ev_label, label_imageMove,canvas,canvaImage
     
    
     window.geometry('700x500')
@@ -304,8 +341,8 @@ def create_window():
     #new window
     #Button(window,text='create new window',command=create_subwindow).pack()
     
-    #tabs
-    notebook = Notebook(window) # widgets that manages a collection of windowa/displays
+    #tabs ttk notebook is from
+    #notebook = Notebook(window) # widgets that manages a collection of windowa/displays
     
     # tab1 = Frame(notebook) #new frame for tab1
     # tab2 = Frame(notebook) #new frame for tab2
@@ -330,8 +367,8 @@ def create_window():
     
     # Button(window,text='Submit',command=submit_grid).grid(row=4,column=0,columnspan=2)
     
-    #progressbar
-    bar = Progressbar(window,orient=HORIZONTAL,length=300)
+    #progressbar ttk
+    #bar = Progressbar(window,orient=HORIZONTAL,length=300)
     # bar.pack(pady=10)
     
     # percentLabel = Label(window,textvariable=percent).pack()
@@ -352,5 +389,59 @@ def create_window():
     #canvas.create_oval(190,190,310,310,fill="white",width=10)
     #canvas.pack()
     
+    #keyboard events
+    # window.bind("<Key>",doSomethingOnKEY)
 
+    key_ev_label = Label(window,font=("Helvetica",100))
+    # key_ev_label.pack()
+    
+    #mouse events
+    #window.bind("<Button-1>",doSomethingOnMouse)#left mouse click
+    #window.bind("<Button-2>",doSomethingOnMouse) #scroll wheel
+    #window.bind("<Button-3>",doSomethingOnMouse) #right mouse click
+    #window.bind("<ButtonRelease>",doSomethingOnMouse)#mousebutton release
+    #window.bind("<Enter>",doSomethingOnMouse) #enter the window
+    #window.bind("<Leave>",doSomethingOnMouse) #leave the window
+    #window.bind("<Motion>",doSomethingOnMouse) #Where the mouse moved
+    
+    #drag and drop
+    label = Label(window,background='red',width=10,height=5)
+    # label.place(x=0,y=0)
+
+    # label2 = Label(window,background="blue",width=10,height=5)
+    # label2.place(x=100,y=100)
+
+    # label.bind("<Button-1>",drag_start)
+    # label.bind("<B1-Motion>",drag_motion)
+
+    # label2.bind("<Button-1>",drag_start)
+    # label2.bind("<B1-Motion>",drag_motion)
+    
+    #move images on window using keys and updown
+    # window.bind("<w>",move_up)
+    # window.bind("<s>",move_down)
+    # window.bind("<a>",move_left)
+    # window.bind("<d>",move_right)
+    # window.bind("<Up>",move_up)
+    # window.bind("<Down>",move_down)
+    # window.bind("<Left>",move_left)
+    # window.bind("<Right>",move_right)
+
+
+    # label_imageMove = Label(window,image=myimage)
+    # label_imageMove.place(x=0,y=0)
+    
+    #move images on canvas
+    # window.bind("<w>",move_up_canvas)
+    # window.bind("<s>",move_down_canvas)
+    # window.bind("<a>",move_left_canvas)
+    # window.bind("<d>",move_right_canvas)
+
+    # canvas = Canvas(window,width=1000,height=1000)
+    # canvas.pack()
+
+    # canvaImage = canvas.create_image(0,0,image=myimage,anchor=NW)
+    
+    #2d animations
+    
     window.mainloop()
