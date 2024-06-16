@@ -186,7 +186,7 @@ def move_down(event):
 def move_left(event):
     label_imageMove.place(x= label_imageMove.winfo_x()-10, y= label_imageMove.winfo_y())
 def move_right(event):
-    label_imageMove.place(x= label_imageMove.winfo_x()+10, y=label.winfo_y())
+    label_imageMove.place(x= label_imageMove.winfo_x()+10, y=label_imageMove.winfo_y())
    
 def move_up_canvas(event):
    canvas.move(canvaImage,0,-10)

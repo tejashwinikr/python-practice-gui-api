@@ -1,4 +1,5 @@
 from gui import create_window
+from anime import anime_window
 from api_handler import get_weather
 
 def main():
@@ -21,7 +22,8 @@ def main():
     # else:
     #     print("Failed to retrieve weather data")
 
-    create_window()
+    # create_window()
+    anime_window()
 
 if __name__ == "__main__":
     main()
