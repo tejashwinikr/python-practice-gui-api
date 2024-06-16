@@ -22,8 +22,8 @@ def main():
     # else:
     #     print("Failed to retrieve weather data")
 
-    # create_window()
-    anime_window()
+    create_window()
+    # anime_window()
 
 if __name__ == "__main__":
     main()
