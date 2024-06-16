@@ -1,6 +1,6 @@
-from gui import create_window
-from anime import anime_window
-from src.APIS.api_handler import get_weather
+from GUI.gui import create_window
+from GUI.anime import anime_window
+from APIS.api_handler import get_weather
 
 def main():
     print("Hello, project is running!buddy")

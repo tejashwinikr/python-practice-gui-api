@@ -9,7 +9,7 @@ food = ['pizza', 'hamburger', 'salad']
 window = Tk()
 percent = StringVar()
 text= StringVar()
-icon_path = os.path.join(os.path.dirname(__file__), 'star.png')
+icon_path = os.path.join(os.path.dirname(__file__), "..",'star.png')
 myimage = PhotoImage(file=icon_path)
 
 def click():
